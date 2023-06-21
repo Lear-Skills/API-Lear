@@ -1,48 +1,48 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import UserEntity from "../types/UserEntity";
 
-@Table({tableName: 'users'})
-export class User extends Model<User> {
-  @Column({
-    primaryKey: true,
-    autoIncrement: true
-  })
-  id: number;
+import { DataTypes, Model, Sequelize } from 'sequelize';
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false
-  })
-  name: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false
-  })
-  email: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false
-  })
-  number_phone: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false
-  })
-  password: string;
-
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false
-  })
-  acess_level: number;
-
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false
-  })
-  site_id: number;
+class User extends Model<UserEntity> {
+  public static initialize(sequelize: Sequelize): void {
+    this.init(
+      {
+        id: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true,
+        },
+        name: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        email: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        number_phone: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        password: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        access_level: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        },
+        site_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        }
+      },
+      {
+        sequelize,
+        modelName: 'Users'
+      }
+    );
+  }
 }
 
-User.sync({force: false}).then(() => {})
+export default User;
+

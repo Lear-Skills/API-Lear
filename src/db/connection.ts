@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
+import User from "./User";
 
 const sequelize = new Sequelize({
   database: 'lear',
@@ -8,4 +9,6 @@ const sequelize = new Sequelize({
   port: 3306,
   dialect: 'mysql'
 })
+
+User.initialize(sequelize);
 export default sequelize
